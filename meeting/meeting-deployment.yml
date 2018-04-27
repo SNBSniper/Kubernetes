@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: micro-meeting
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: micro-meeting
+        tier: backend
+    spec:
+      containers:
+      - name: micro-meeting
+        image: conectter/micro-meeting:1.0-SNAPSHOT
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 20000
