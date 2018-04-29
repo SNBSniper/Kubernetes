@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: micro-meeting
+  labels:
+    run: micro-meeting
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: micro-meeting
+    spec:
+      containers:
+      - name: micro-meeting
+        image: u7hb34w7z3wwu.azurecr.io/conectter-micro/meeting:latest
+        ports:
+          - containerPort: 20000
+            protocol: TCP
+      - name: mysql
+        image: mysql:5.7
+        ports:
+          - containerPort: 3306
+            protocol: TCP
+        
