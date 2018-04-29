@@ -1,25 +1,38 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: micro-meeting
+  name: micro-meeting-deployment
   labels:
-    run: micro-meeting
+    run: micro-meeting-deployment
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        run: micro-meeting
+        run: micro-meeting-deployment 
     spec:
       containers:
-      - name: micro-meeting
+      # - name: meeting-mysql
+      #   image: mysql:5.7
+      #   env: 
+      #     - name: MYSQL_ROOT_PASSWORD
+      #       value: 3ayx4HSsduxS4gEU8Ut9Lv4gPs5uTbXH5awDde9EQ5j
+      #   ports:
+      #     - containerPort: 3306
+      #       protocol: TCP
+      #       name: meeting-mysql
+      #   volumeMounts:
+      #   - name: mysql-persistent-storage
+      #     mountPath: /var/lib/mysql
+      - name: meeting-app
         image: u7hb34w7z3wwu.azurecr.io/conectter-micro/meeting:latest
         ports:
           - containerPort: 20000
             protocol: TCP
-      - name: mysql
-        image: mysql:5.7
-        ports:
-          - containerPort: 3306
-            protocol: TCP
+      imagePullSecrets:
+      - name: regcred
+      # volumes:
+      # - name: mysql-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: mysql-pv-claim
         

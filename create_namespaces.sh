@@ -6,11 +6,11 @@ kubectl create -f namespaces/namespace-test.json
 
 
 
-kubectl config set-context dev --namespace=development \
+kubectl config set-context dev --namespace=dev \
   --cluster=$name \
   --user=$name
 
-kubectl config set-context prod --namespace=production \
+kubectl config set-context prod --namespace=prod \
   --cluster=$name \
   --user=$name
  

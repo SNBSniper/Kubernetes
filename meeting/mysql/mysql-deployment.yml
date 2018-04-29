@@ -1,28 +1,28 @@
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: mysql
+  name: meeting-mysql
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: meeting-mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: meeting-mysql
     spec:
       containers:
       - image: mysql:5.7
-        name: mysql
+        name: meeting-mysql
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
           value: 3ayx4HSsduxS4gEU8Ut9Lv4gPs5uTbXH5awDde9EQ5j
         ports:
         - containerPort: 3306
-          name: mysql
+          name: meeting-mysql
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
