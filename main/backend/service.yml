@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: main-backend
+  labels:
+    app:  main-old-service
+    tier: backend
+spec:
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - protocol: TCP
+      port: 80
+      targetPort: http
+  selector:
+    name: main-backend
+    tier: backend

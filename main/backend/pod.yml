@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: old-backend
+spec:
+  containers:
+  - name:  old-backend
+    image: u7hb34w7z3wwu.azurecr.io/conectter/backend:latest
+  imagePullSecrets:
+  - name: regcred

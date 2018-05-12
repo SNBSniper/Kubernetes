@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata: 
+    name: main-backend 
+spec:
+    selector: 
+        matchLabels:
+            app: main-backend
+            tier: backend
+            track: stable
+    replicas: 2
+    template:
+        metadata:
+            labels: 
+                app: main-backend
+                tier: backend
+                track: stable
+        spec: 
+            containers:
+                - name: main-backend
+                  image: u7hb34w7z3wwu.azurecr.io/conectter/backend:latest
+                  ports:
+                    - name: http
+                      containerPort: 80
+            imagePullSecrets:
+                - name: regcred
+
