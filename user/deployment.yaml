@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: conectter-user
+  labels: 
+    run: user
+    name: micro-user-depl
+spec: 
+  selector:
+    matchLabels:
+        app: conectter-user
+        tier: microservice
+        track: stable
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: conectter-user
+        tier: microservice
+        track: stable
+    spec: 
+      containers:
+         - name: conectter-user
+           image: u7hb34w7z3wwu.azurecr.io/conectter/micro-user:latest
+           ports:
+             - containerPort: 3000
+               protocol: TCP
+      imagePullSecrets:
+           - name: regcred
+

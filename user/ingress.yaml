@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: micro-user-ingress
+spec:
+  backend:
+    serviceName: micro-user-svc
+    servicePort: 3000
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /gg1
+        backend:
+          serviceName: micro-user-svc
+          servicePort: 3000

@@ -1,0 +1,2513 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"conectterbackend-staging-v074","uid":"8a564e89-44a5-11e8-82ee-0a58ac1f2c89","apiVersion":"extensions","resourceVersion":"15861432"}}
+    creationTimestamp: 2018-04-20T14:17:23Z
+    generateName: conectterbackend-staging-v074-
+    labels:
+      app: conectterbackend
+      cluster: conectterbackend-staging
+      conectterbackend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      pod-template-hash: "2202713984"
+      replication-controller: conectterbackend-staging-v074
+      stack: staging
+      version: "74"
+    name: conectterbackend-staging-v074-8qfhj
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: conectterbackend-staging-v074
+      uid: 8a564e89-44a5-11e8-82ee-0a58ac1f2c89
+    resourceVersion: "15861479"
+    selfLink: /api/v1/namespaces/default/pods/conectterbackend-staging-v074-8qfhj
+    uid: 8b917641-44a5-11e8-82ee-0a58ac1f2c89
+  spec:
+    containers:
+    - command:
+      - /bin/sh
+      - -c
+      - php artisan serve --host 0.0.0.0
+      env:
+      - name: APP_ENV
+        value: LOCAL
+      - name: DB_HOST
+        value: conectterdb.mysql.database.azure.com
+      - name: DB_DATABASE
+        value: stagingdb
+      - name: DB_USERNAME
+        value: cnttr-db-admin@conectterdb
+      - name: DB_PASSWORD
+        value: JqNDT4gDjjyMxVkjTNq42LCkN2cQ4mcY
+      - name: DB_PORT
+        value: "3306"
+      image: u7hb34w7z3wwu.azurecr.io/conectter/backend:88
+      imagePullPolicy: IfNotPresent
+      lifecycle:
+        postStart:
+          exec:
+            command:
+            - php
+            - artisan
+            - migrate
+            - --force
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 8000
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: conectter-backend
+      ports:
+      - containerPort: 8000
+        name: laravel
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 8000
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    imagePullSecrets:
+    - name: micro-user-az-registry
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-04-20T14:17:23Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-04-20T14:17:33Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-04-20T14:17:23Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://694a1fecefa8b33be863c8faf46b7153c0557da3a8752f48d37d0b8c6f301e49
+      image: u7hb34w7z3wwu.azurecr.io/conectter/backend:87
+      imageID: docker-pullable://u7hb34w7z3wwu.azurecr.io/conectter/backend@sha256:4669472e38f7e0a1c8efe52ead2454a28ba6ba372ed4237e306e121218ec7396
+      lastState: {}
+      name: conectter-backend
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: 2018-04-20T14:17:25Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.145
+    qosClass: BestEffort
+    startTime: 2018-04-20T14:17:23Z
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"conectterfrontend-staging-v070","uid":"ad852605-44a5-11e8-82ee-0a58ac1f2c89","apiVersion":"extensions","resourceVersion":"15861602"}}
+    creationTimestamp: 2018-04-20T14:18:21Z
+    generateName: conectterfrontend-staging-v070-
+    labels:
+      app: conectterfrontend
+      cluster: conectterfrontend-staging
+      conectterfrontend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      pod-template-hash: "3671398131"
+      replication-controller: conectterfrontend-staging-v070
+      stack: staging
+      version: "70"
+    name: conectterfrontend-staging-v070-lq72b
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: conectterfrontend-staging-v070
+      uid: ad852605-44a5-11e8-82ee-0a58ac1f2c89
+    resourceVersion: "15861687"
+    selfLink: /api/v1/namespaces/default/pods/conectterfrontend-staging-v070-lq72b
+    uid: ae53edca-44a5-11e8-82ee-0a58ac1f2c89
+  spec:
+    containers:
+    - command:
+      - /bin/sh
+      - -c
+      - gulp serve
+      image: u7hb34w7z3wwu.azurecr.io/conectter/frontend:74
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 3000
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: conectter-frontend
+      ports:
+      - containerPort: 3000
+        name: http
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 3000
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    imagePullSecrets:
+    - name: micro-user-az-registry
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-04-20T14:18:22Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-04-20T14:18:48Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-04-20T14:18:22Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://47e8a0c339d1b47f1757a8fd98f334080d3a24c99f182f05155d1295bea6fc3e
+      image: u7hb34w7z3wwu.azurecr.io/conectter/frontend:74
+      imageID: docker-pullable://u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:44717a35a580baf2d86c87c60a095557967722175644c04f01b622a46eabf0d1
+      lastState: {}
+      name: conectter-frontend
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: 2018-04-20T14:18:29Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.146
+    qosClass: BestEffort
+    startTime: 2018-04-20T14:18:22Z
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"kong-rc-5fb4657f5d","uid":"e69bd48d-1ca7-11e8-becf-0a58ac1f23bf","apiVersion":"extensions","resourceVersion":"6954074"}}
+    creationTimestamp: 2018-02-28T16:53:28Z
+    generateName: kong-rc-5fb4657f5d-
+    labels:
+      app: kong
+      name: kong-rc
+      pod-template-hash: "1960213918"
+    name: kong-rc-5fb4657f5d-n7lcd
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: kong-rc-5fb4657f5d
+      uid: e69bd48d-1ca7-11e8-becf-0a58ac1f23bf
+    resourceVersion: "13485423"
+    selfLink: /api/v1/namespaces/default/pods/kong-rc-5fb4657f5d-n7lcd
+    uid: e6a2d5fa-1ca7-11e8-becf-0a58ac1f23bf
+  spec:
+    containers:
+    - env:
+      - name: KONG_ADMIN_LISTEN
+        value: 0.0.0.0:8001
+      - name: KONG_ADMIN_LISTEN_SSL
+        value: 0.0.0.0:8444
+      - name: KONG_PG_PASSWORD
+        value: kong
+      - name: KONG_PG_HOST
+        value: postgres
+      - name: KONG_PROXY_ACCESS_LOG
+        value: /dev/stdout
+      - name: KONG_ADMIN_ACCESS_LOG
+        value: /dev/stdout
+      - name: KONG_PROXY_ERROR_LOG
+        value: /dev/stderr
+      - name: KONG_ADMIN_ERROR_LOG
+        value: /dev/stderr
+      image: kong
+      imagePullPolicy: Always
+      name: kong
+      ports:
+      - containerPort: 8001
+        name: admin
+        protocol: TCP
+      - containerPort: 8000
+        name: proxy
+        protocol: TCP
+      - containerPort: 8443
+        name: proxy-ssl
+        protocol: TCP
+      - containerPort: 8444
+        name: admin-ssl
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:28Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:33Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:28Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://0813e9c4bfb1be3f84595ca46d3d0353663b84759b98951663cf04a30ba1a206
+      image: kong:latest
+      imageID: docker-pullable://kong@sha256:ed49c38f573ab06e665973c68f9219e86731fd41dce884c97f60b55fccea636a
+      lastState: {}
+      name: kong
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: 2018-02-28T16:53:32Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.56
+    qosClass: BestEffort
+    startTime: 2018-02-28T16:53:28Z
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"kong-rc-5fb4657f5d","uid":"e69bd48d-1ca7-11e8-becf-0a58ac1f23bf","apiVersion":"extensions","resourceVersion":"6954074"}}
+    creationTimestamp: 2018-02-28T16:53:28Z
+    generateName: kong-rc-5fb4657f5d-
+    labels:
+      app: kong
+      name: kong-rc
+      pod-template-hash: "1960213918"
+    name: kong-rc-5fb4657f5d-wk8jl
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: kong-rc-5fb4657f5d
+      uid: e69bd48d-1ca7-11e8-becf-0a58ac1f23bf
+    resourceVersion: "13485496"
+    selfLink: /api/v1/namespaces/default/pods/kong-rc-5fb4657f5d-wk8jl
+    uid: e6a2e2d1-1ca7-11e8-becf-0a58ac1f23bf
+  spec:
+    containers:
+    - env:
+      - name: KONG_ADMIN_LISTEN
+        value: 0.0.0.0:8001
+      - name: KONG_ADMIN_LISTEN_SSL
+        value: 0.0.0.0:8444
+      - name: KONG_PG_PASSWORD
+        value: kong
+      - name: KONG_PG_HOST
+        value: postgres
+      - name: KONG_PROXY_ACCESS_LOG
+        value: /dev/stdout
+      - name: KONG_ADMIN_ACCESS_LOG
+        value: /dev/stdout
+      - name: KONG_PROXY_ERROR_LOG
+        value: /dev/stderr
+      - name: KONG_ADMIN_ERROR_LOG
+        value: /dev/stderr
+      image: kong
+      imagePullPolicy: Always
+      name: kong
+      ports:
+      - containerPort: 8001
+        name: admin
+        protocol: TCP
+      - containerPort: 8000
+        name: proxy
+        protocol: TCP
+      - containerPort: 8443
+        name: proxy-ssl
+        protocol: TCP
+      - containerPort: 8444
+        name: admin-ssl
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:28Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:31Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:28Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://8785a707e526ef2265c8b0882bd7f60eb242664dea6e8534cfe880b3520f5473
+      image: kong:latest
+      imageID: docker-pullable://kong@sha256:ed49c38f573ab06e665973c68f9219e86731fd41dce884c97f60b55fccea636a
+      lastState: {}
+      name: kong
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: 2018-02-28T16:53:31Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.55
+    qosClass: BestEffort
+    startTime: 2018-02-28T16:53:28Z
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"kong-rc-5fb4657f5d","uid":"e69bd48d-1ca7-11e8-becf-0a58ac1f23bf","apiVersion":"extensions","resourceVersion":"6954074"}}
+    creationTimestamp: 2018-02-28T16:53:28Z
+    generateName: kong-rc-5fb4657f5d-
+    labels:
+      app: kong
+      name: kong-rc
+      pod-template-hash: "1960213918"
+    name: kong-rc-5fb4657f5d-zctjl
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: kong-rc-5fb4657f5d
+      uid: e69bd48d-1ca7-11e8-becf-0a58ac1f23bf
+    resourceVersion: "13485457"
+    selfLink: /api/v1/namespaces/default/pods/kong-rc-5fb4657f5d-zctjl
+    uid: e6a0510d-1ca7-11e8-becf-0a58ac1f23bf
+  spec:
+    containers:
+    - env:
+      - name: KONG_ADMIN_LISTEN
+        value: 0.0.0.0:8001
+      - name: KONG_ADMIN_LISTEN_SSL
+        value: 0.0.0.0:8444
+      - name: KONG_PG_PASSWORD
+        value: kong
+      - name: KONG_PG_HOST
+        value: postgres
+      - name: KONG_PROXY_ACCESS_LOG
+        value: /dev/stdout
+      - name: KONG_ADMIN_ACCESS_LOG
+        value: /dev/stdout
+      - name: KONG_PROXY_ERROR_LOG
+        value: /dev/stderr
+      - name: KONG_ADMIN_ERROR_LOG
+        value: /dev/stderr
+      image: kong
+      imagePullPolicy: Always
+      name: kong
+      ports:
+      - containerPort: 8001
+        name: admin
+        protocol: TCP
+      - containerPort: 8000
+        name: proxy
+        protocol: TCP
+      - containerPort: 8443
+        name: proxy-ssl
+        protocol: TCP
+      - containerPort: 8444
+        name: admin-ssl
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:28Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:31Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:53:28Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://1f9f73fe8530ca48ef80d834b394be0fd9b9481aa804677d7b35fb1b95d20c18
+      image: kong:latest
+      imageID: docker-pullable://kong@sha256:ed49c38f573ab06e665973c68f9219e86731fd41dce884c97f60b55fccea636a
+      lastState: {}
+      name: kong
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: 2018-02-28T16:53:31Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.54
+    qosClass: BestEffort
+    startTime: 2018-02-28T16:53:28Z
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicationController","namespace":"default","name":"postgres","uid":"524330af-1ca7-11e8-becf-0a58ac1f23bf","apiVersion":"v1","resourceVersion":"6953502"}}
+    creationTimestamp: 2018-02-28T16:49:20Z
+    generateName: postgres-
+    labels:
+      app: postgres
+    name: postgres-4hrqr
+    namespace: default
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicationController
+      name: postgres
+      uid: 524330af-1ca7-11e8-becf-0a58ac1f23bf
+    resourceVersion: "13485452"
+    selfLink: /api/v1/namespaces/default/pods/postgres-4hrqr
+    uid: 52442cbf-1ca7-11e8-becf-0a58ac1f23bf
+  spec:
+    containers:
+    - env:
+      - name: POSTGRES_USER
+        value: kong
+      - name: POSTGRES_PASSWORD
+        value: kong
+      - name: POSTGRES_DB
+        value: kong
+      - name: PGDATA
+        value: /var/lib/postgresql/data/pgdata
+      image: postgres:9.4
+      imagePullPolicy: IfNotPresent
+      name: postgres
+      ports:
+      - containerPort: 5432
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/lib/postgresql/data
+        name: pg-data
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - emptyDir: {}
+      name: pg-data
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:49:20Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:49:43Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-28T16:49:20Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://0e7ae784d41e6752bbae0c1c036cb024f258abfca12fbb462e502527e11ed654
+      image: postgres:9.4
+      imageID: docker-pullable://postgres@sha256:6c4d8fd87439a6e7db3c0b3c1edc7beb3ce8df8e30c0589b383a7b1911f21db0
+      lastState: {}
+      name: postgres
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: 2018-02-28T16:49:42Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.52
+    qosClass: BestEffort
+    startTime: 2018-02-28T16:49:20Z
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      checksum/config: 33481d2cc1e14914be061959c14749fbe1524e42d8712be4cd9ffc0cd7a151a4
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"stgnglb-nginx-ingress-controller-675c458764","uid":"7d0898f2-faf8-11e7-9c30-0a58ac1f16d7","apiVersion":"extensions","resourceVersion":"1352"}}
+    creationTimestamp: 2018-01-16T20:04:41Z
+    generateName: stgnglb-nginx-ingress-controller-675c458764-
+    labels:
+      app: nginx-ingress
+      component: controller
+      pod-template-hash: "2317014320"
+      release: stgnglb
+    name: stgnglb-nginx-ingress-controller-675c458764-865v8
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: stgnglb-nginx-ingress-controller-675c458764
+      uid: 7d0898f2-faf8-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "13485484"
+    selfLink: /api/v1/namespaces/default/pods/stgnglb-nginx-ingress-controller-675c458764-865v8
+    uid: 7d0c3f67-faf8-11e7-9c30-0a58ac1f16d7
+  spec:
+    containers:
+    - args:
+      - /nginx-ingress-controller
+      - --default-backend-service=default/stgnglb-nginx-ingress-default-backend
+      - --election-id=ingress-controller-leader
+      - --ingress-class=nginx
+      - --configmap=default/stgnglb-nginx-ingress-controller
+      env:
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      image: gcr.io/google_containers/nginx-ingress-controller:0.9.0-beta.15
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /healthz
+          port: 10254
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: nginx-ingress-controller
+      ports:
+      - containerPort: 80
+        name: http
+        protocol: TCP
+      - containerPort: 443
+        name: https
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /healthz
+          port: 10254
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 60
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-01-16T20:04:41Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-14T13:14:33Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-01-16T20:04:41Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://589ec8b3c751c0177260c4d0bd57ba5ba7dfdc0adc4b4743ccea5c359ed9ef3f
+      image: gcr.io/google_containers/nginx-ingress-controller:0.9.0-beta.15
+      imageID: docker-pullable://gcr.io/google_containers/nginx-ingress-controller@sha256:1c64bc6dfb7ddbe4a0a9fce7f5c521aa13e7836c3b90601897b763add8494a41
+      lastState:
+        terminated:
+          containerID: docker://a06d60fea4f08909bab8055689054c11e73d3ff6a4151a13b2b96c5a9e8fe631
+          exitCode: 0
+          finishedAt: 2018-02-14T13:14:20Z
+          reason: Completed
+          startedAt: 2018-02-14T13:13:48Z
+      name: nginx-ingress-controller
+      ready: true
+      restartCount: 2
+      state:
+        running:
+          startedAt: 2018-02-14T13:14:21Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.10
+    qosClass: BestEffort
+    startTime: 2018-01-16T20:04:41Z
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/created-by: |
+        {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"stgnglb-nginx-ingress-default-backend-6ff9fc5bc6","uid":"7d101b07-faf8-11e7-9c30-0a58ac1f16d7","apiVersion":"extensions","resourceVersion":"1361"}}
+    creationTimestamp: 2018-01-16T20:04:41Z
+    generateName: stgnglb-nginx-ingress-default-backend-6ff9fc5bc6-
+    labels:
+      app: nginx-ingress
+      component: default-backend
+      pod-template-hash: "2995971672"
+      release: stgnglb
+    name: stgnglb-nginx-ingress-default-backend-6ff9fc5bc6-5cmg2
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: stgnglb-nginx-ingress-default-backend-6ff9fc5bc6
+      uid: 7d101b07-faf8-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "13485490"
+    selfLink: /api/v1/namespaces/default/pods/stgnglb-nginx-ingress-default-backend-6ff9fc5bc6-5cmg2
+    uid: 7d12f197-faf8-11e7-9c30-0a58ac1f16d7
+  spec:
+    containers:
+    - image: gcr.io/google_containers/defaultbackend:1.3
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /healthz
+          port: 8080
+          scheme: HTTP
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      name: nginx-ingress-default-backend
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-rdtkv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    nodeName: aks-nodepool1-41486201-0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 60
+    tolerations:
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/notReady
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.alpha.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-rdtkv
+      secret:
+        defaultMode: 420
+        secretName: default-token-rdtkv
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: 2018-01-16T20:04:41Z
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: 2018-02-14T13:13:59Z
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: 2018-01-16T20:04:41Z
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://837f3b208d788c33d51681c47c4eae4681591aff1df5817b7e5c217800ab2234
+      image: gcr.io/google_containers/defaultbackend:1.3
+      imageID: docker-pullable://gcr.io/google_containers/defaultbackend@sha256:fb91f9395ddf44df1ca3adf68b25dcbc269e5d08ba14a40de9abdedafacf93d4
+      lastState:
+        terminated:
+          containerID: docker://6415821fad9bbd3a753504120cc9f9135c19e90bdc8d3e288044c0bfd53db61f
+          exitCode: 1
+          finishedAt: 2018-02-14T13:13:10Z
+          reason: Error
+          startedAt: 2018-01-16T20:04:52Z
+      name: nginx-ingress-default-backend
+      ready: true
+      restartCount: 1
+      state:
+        running:
+          startedAt: 2018-02-14T13:13:42Z
+    hostIP: 10.240.0.4
+    phase: Running
+    podIP: 10.244.0.7
+    qosClass: BestEffort
+    startTime: 2018-01-16T20:04:41Z
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "77"
+      deployment.kubernetes.io/revision-history: "1"
+    creationTimestamp: 2018-01-17T02:19:40Z
+    generation: 75
+    labels:
+      app: conectterbackend
+      cluster: conectterbackend-staging
+      conectterbackend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      replication-controller: conectterbackend-staging-v074
+      stack: staging
+      version: "74"
+    name: conectterbackend-staging
+    namespace: default
+    resourceVersion: "15861482"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/conectterbackend-staging
+    uid: df504b40-fb2c-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        conectterbackend-staging: "true"
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: conectterbackend
+          cluster: conectterbackend-staging
+          conectterbackend-staging: "true"
+          load-balancer-stgnglb-nginx-ingress-controller: "true"
+          replication-controller: conectterbackend-staging-v074
+          stack: staging
+          version: "74"
+      spec:
+        containers:
+        - command:
+          - /bin/sh
+          - -c
+          - php artisan serve --host 0.0.0.0
+          env:
+          - name: APP_ENV
+            value: LOCAL
+          - name: DB_HOST
+            value: conectterdb.mysql.database.azure.com
+          - name: DB_DATABASE
+            value: stagingdb
+          - name: DB_USERNAME
+            value: cnttr-db-admin@conectterdb
+          - name: DB_PASSWORD
+            value: JqNDT4gDjjyMxVkjTNq42LCkN2cQ4mcY
+          - name: DB_PORT
+            value: "3306"
+          image: u7hb34w7z3wwu.azurecr.io/conectter/backend:88
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - php
+                - artisan
+                - migrate
+                - --force
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: conectter-backend
+          ports:
+          - containerPort: 8000
+            name: laravel
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: micro-user-az-registry
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2018-01-17T02:19:41Z
+      lastUpdateTime: 2018-01-17T02:19:41Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 75
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "72"
+    creationTimestamp: 2018-01-17T18:36:50Z
+    generation: 71
+    labels:
+      app: conectterfrontend
+      cluster: conectterfrontend-staging
+      conectterfrontend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      replication-controller: conectterfrontend-staging-v070
+      stack: staging
+      version: "70"
+    name: conectterfrontend-staging
+    namespace: default
+    resourceVersion: "15861690"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/conectterfrontend-staging
+    uid: 617179f2-fbb5-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        conectterfrontend-staging: "true"
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: conectterfrontend
+          cluster: conectterfrontend-staging
+          conectterfrontend-staging: "true"
+          load-balancer-stgnglb-nginx-ingress-controller: "true"
+          replication-controller: conectterfrontend-staging-v070
+          stack: staging
+          version: "70"
+      spec:
+        containers:
+        - command:
+          - /bin/sh
+          - -c
+          - gulp serve
+          image: u7hb34w7z3wwu.azurecr.io/conectter/frontend:74
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: conectter-frontend
+          ports:
+          - containerPort: 3000
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: micro-user-az-registry
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2018-01-17T18:36:51Z
+      lastUpdateTime: 2018-01-17T18:36:51Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 71
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2018-02-28T16:53:28Z
+    generation: 1
+    labels:
+      app: kong
+      name: kong-rc
+    name: kong-rc
+    namespace: default
+    resourceVersion: "13485502"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/kong-rc
+    uid: e69ad31e-1ca7-11e8-becf-0a58ac1f23bf
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: kong
+        name: kong-rc
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: kong
+          name: kong-rc
+      spec:
+        containers:
+        - env:
+          - name: KONG_ADMIN_LISTEN
+            value: 0.0.0.0:8001
+          - name: KONG_ADMIN_LISTEN_SSL
+            value: 0.0.0.0:8444
+          - name: KONG_PG_PASSWORD
+            value: kong
+          - name: KONG_PG_HOST
+            value: postgres
+          - name: KONG_PROXY_ACCESS_LOG
+            value: /dev/stdout
+          - name: KONG_ADMIN_ACCESS_LOG
+            value: /dev/stdout
+          - name: KONG_PROXY_ERROR_LOG
+            value: /dev/stderr
+          - name: KONG_ADMIN_ERROR_LOG
+            value: /dev/stderr
+          image: kong
+          imagePullPolicy: Always
+          name: kong
+          ports:
+          - containerPort: 8001
+            name: admin
+            protocol: TCP
+          - containerPort: 8000
+            name: proxy
+            protocol: TCP
+          - containerPort: 8443
+            name: proxy-ssl
+            protocol: TCP
+          - containerPort: 8444
+            name: admin-ssl
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 3
+    conditions:
+    - lastTransitionTime: 2018-04-05T21:34:20Z
+      lastUpdateTime: 2018-04-05T21:34:20Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 3
+    replicas: 3
+    updatedReplicas: 3
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2018-01-16T20:04:41Z
+    generation: 1
+    labels:
+      app: nginx-ingress
+      chart: nginx-ingress-0.8.21
+      component: controller
+      heritage: Tiller
+      release: stgnglb
+    name: stgnglb-nginx-ingress-controller
+    namespace: default
+    resourceVersion: "13485487"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/stgnglb-nginx-ingress-controller
+    uid: 7d07fde1-faf8-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: nginx-ingress
+        component: controller
+        release: stgnglb
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          checksum/config: 33481d2cc1e14914be061959c14749fbe1524e42d8712be4cd9ffc0cd7a151a4
+        creationTimestamp: null
+        labels:
+          app: nginx-ingress
+          component: controller
+          release: stgnglb
+      spec:
+        containers:
+        - args:
+          - /nginx-ingress-controller
+          - --default-backend-service=default/stgnglb-nginx-ingress-default-backend
+          - --election-id=ingress-controller-leader
+          - --ingress-class=nginx
+          - --configmap=default/stgnglb-nginx-ingress-controller
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          image: gcr.io/google_containers/nginx-ingress-controller:0.9.0-beta.15
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 10254
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: nginx-ingress-controller
+          ports:
+          - containerPort: 80
+            name: http
+            protocol: TCP
+          - containerPort: 443
+            name: https
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 10254
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: default
+        serviceAccountName: default
+        terminationGracePeriodSeconds: 60
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2018-01-16T20:04:41Z
+      lastUpdateTime: 2018-01-16T20:04:41Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2018-01-16T20:04:41Z
+    generation: 1
+    labels:
+      app: nginx-ingress
+      chart: nginx-ingress-0.8.21
+      component: default-backend
+      heritage: Tiller
+      release: stgnglb
+    name: stgnglb-nginx-ingress-default-backend
+    namespace: default
+    resourceVersion: "13485493"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/stgnglb-nginx-ingress-default-backend
+    uid: 7d0cba66-faf8-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: nginx-ingress
+        component: default-backend
+        release: stgnglb
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: nginx-ingress
+          component: default-backend
+          release: stgnglb
+      spec:
+        containers:
+        - image: gcr.io/google_containers/defaultbackend:1.3
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: nginx-ingress-default-backend
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 60
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2018-01-16T20:04:41Z
+      lastUpdateTime: 2018-01-16T20:04:41Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: v1
+  kind: ReplicationController
+  metadata:
+    creationTimestamp: 2018-02-28T16:49:20Z
+    generation: 1
+    labels:
+      app: postgres
+    name: postgres
+    namespace: default
+    resourceVersion: "13485454"
+    selfLink: /api/v1/namespaces/default/replicationcontrollers/postgres
+    uid: 524330af-1ca7-11e8-becf-0a58ac1f23bf
+  spec:
+    replicas: 1
+    selector:
+      app: postgres
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: postgres
+      spec:
+        containers:
+        - env:
+          - name: POSTGRES_USER
+            value: kong
+          - name: POSTGRES_PASSWORD
+            value: kong
+          - name: POSTGRES_DB
+            value: kong
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+          image: postgres:9.4
+          imagePullPolicy: IfNotPresent
+          name: postgres
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: pg-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: pg-data
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: extensions/v1beta1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "2"
+      deployment.kubernetes.io/revision-history: "1"
+    creationTimestamp: 2018-01-17T02:19:38Z
+    generation: 5
+    labels:
+      app: conectterbackend
+      cluster: conectterbackend-staging
+      conectterbackend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      pod-template-hash: "1256958341"
+      replication-controller: conectterbackend-staging-v000
+      stack: staging
+      version: "0"
+    name: conectterbackend-staging-v000
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: conectterbackend-staging
+      uid: df504b40-fb2c-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "30111"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/conectterbackend-staging-v000
+    uid: de195ce9-fb2c-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: conectterbackend
+        cluster: conectterbackend-staging
+        conectterbackend-staging: "true"
+        pod-template-hash: "1256958341"
+        replication-controller: conectterbackend-staging-v000
+        stack: staging
+        version: "0"
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: conectterbackend
+          cluster: conectterbackend-staging
+          conectterbackend-staging: "true"
+          load-balancer-stgnglb-nginx-ingress-controller: "true"
+          pod-template-hash: "1256958341"
+          replication-controller: conectterbackend-staging-v000
+          stack: staging
+          version: "0"
+      spec:
+        containers:
+        - image: u7hb34w7z3wwu.azurecr.io/conectter/backend:10
+          imagePullPolicy: IfNotPresent
+          name: conectter-backend
+          ports:
+          - containerPort: 80
+            name: http
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: backend-az-registry
+        - name: frontend-az-registry
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 5
+    replicas: 0
+- apiVersion: extensions/v1beta1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "12"
+      deployment.kubernetes.io/revision-history: 1,3
+    creationTimestamp: 2018-01-22T15:34:23Z
+    generation: 5
+    labels:
+      app: conectterbackend
+      cluster: conectterbackend-staging
+      conectterbackend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      pod-template-hash: "1433395692"
+      replication-controller: conectterbackend-staging-v009
+      stack: staging
+      version: "9"
+    name: conectterbackend-staging-v009
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: conectterbackend-staging
+      uid: df504b40-fb2c-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "1240444"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/conectterbackend-staging-v009
+    uid: b8e30b2f-ff89-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: conectterbackend
+        cluster: conectterbackend-staging
+        conectterbackend-staging: "true"
+        pod-template-hash: "1433395692"
+        replication-controller: conectterbackend-staging-v009
+        stack: staging
+        version: "9"
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: conectterbackend
+          cluster: conectterbackend-staging
+          conectterbackend-staging: "true"
+          load-balancer-stgnglb-nginx-ingress-controller: "true"
+          pod-template-hash: "1433395692"
+          replication-controller: conectterbackend-staging-v009
+          stack: staging
+          version: "9"
+      spec:
+        containers:
+        - command:
+          - /bin/sh
+          - -c
+          - php artisan serve --host 0.0.0.0
+          env:
+          - name: APP_ENV
+            value: LOCAL
+          - name: DB_HOST
+            value: conectterdb.mysql.database.azure.com
+          - name: DB_DATABASE
+            value: stagingdb
+          - name: DB_USERNAME
+            value: cnttr-db-admin@conectterdb
+          - name: DB_PASSWORD
+            value: JqNDT4gDjjyMxVkjTNq42LCkN2cQ4mcY
+          - name: DB_PORT
+            value: "3306"
+          image: u7hb34w7z3wwu.azurecr.io/conectter/backend:21
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - php
+                - artisan
+                - migrate
+                - --force
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: conectter-backend
+          ports:
+          - containerPort: 8000
+            name: laravel
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: backend-az-registry
+        - name: frontend-az-registry
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 5
+    replicas: 0
+- apiVersion: extensions/v1beta1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "77"
+      deployment.kubernetes.io/revision-history: 1,3
+    creationTimestamp: 2018-04-20T14:17:21Z
+    generation: 4
+    labels:
+      app: conectterbackend
+      cluster: conectterbackend-staging
+      conectterbackend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      pod-template-hash: "2202713984"
+      replication-controller: conectterbackend-staging-v074
+      stack: staging
+      version: "74"
+    name: conectterbackend-staging-v074
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: conectterbackend-staging
+      uid: df504b40-fb2c-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "15861481"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/conectterbackend-staging-v074
+    uid: 8a564e89-44a5-11e8-82ee-0a58ac1f2c89
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: conectterbackend
+        cluster: conectterbackend-staging
+        conectterbackend-staging: "true"
+        pod-template-hash: "2202713984"
+        replication-controller: conectterbackend-staging-v074
+        stack: staging
+        version: "74"
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: conectterbackend
+          cluster: conectterbackend-staging
+          conectterbackend-staging: "true"
+          load-balancer-stgnglb-nginx-ingress-controller: "true"
+          pod-template-hash: "2202713984"
+          replication-controller: conectterbackend-staging-v074
+          stack: staging
+          version: "74"
+      spec:
+        containers:
+        - command:
+          - /bin/sh
+          - -c
+          - php artisan serve --host 0.0.0.0
+          env:
+          - name: APP_ENV
+            value: LOCAL
+          - name: DB_HOST
+            value: conectterdb.mysql.database.azure.com
+          - name: DB_DATABASE
+            value: stagingdb
+          - name: DB_USERNAME
+            value: cnttr-db-admin@conectterdb
+          - name: DB_PASSWORD
+            value: JqNDT4gDjjyMxVkjTNq42LCkN2cQ4mcY
+          - name: DB_PORT
+            value: "3306"
+          image: u7hb34w7z3wwu.azurecr.io/conectter/backend:88
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - php
+                - artisan
+                - migrate
+                - --force
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: conectter-backend
+          ports:
+          - containerPort: 8000
+            name: laravel
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: micro-user-az-registry
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 4
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: extensions/v1beta1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "72"
+      deployment.kubernetes.io/revision-history: "1"
+    creationTimestamp: 2018-04-20T14:18:20Z
+    generation: 4
+    labels:
+      app: conectterfrontend
+      cluster: conectterfrontend-staging
+      conectterfrontend-staging: "true"
+      load-balancer-stgnglb-nginx-ingress-controller: "true"
+      pod-template-hash: "3671398131"
+      replication-controller: conectterfrontend-staging-v070
+      stack: staging
+      version: "70"
+    name: conectterfrontend-staging-v070
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: conectterfrontend-staging
+      uid: 617179f2-fbb5-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "15861688"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/conectterfrontend-staging-v070
+    uid: ad852605-44a5-11e8-82ee-0a58ac1f2c89
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: conectterfrontend
+        cluster: conectterfrontend-staging
+        conectterfrontend-staging: "true"
+        pod-template-hash: "3671398131"
+        replication-controller: conectterfrontend-staging-v070
+        stack: staging
+        version: "70"
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: conectterfrontend
+          cluster: conectterfrontend-staging
+          conectterfrontend-staging: "true"
+          load-balancer-stgnglb-nginx-ingress-controller: "true"
+          pod-template-hash: "3671398131"
+          replication-controller: conectterfrontend-staging-v070
+          stack: staging
+          version: "70"
+      spec:
+        containers:
+        - command:
+          - /bin/sh
+          - -c
+          - gulp serve
+          image: u7hb34w7z3wwu.azurecr.io/conectter/frontend:74
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: conectter-frontend
+          ports:
+          - containerPort: 3000
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 3000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: micro-user-az-registry
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 4
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: extensions/v1beta1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "3"
+      deployment.kubernetes.io/max-replicas: "4"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2018-02-28T16:53:28Z
+    generation: 1
+    labels:
+      app: kong
+      name: kong-rc
+      pod-template-hash: "1960213918"
+    name: kong-rc-5fb4657f5d
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: kong-rc
+      uid: e69ad31e-1ca7-11e8-becf-0a58ac1f23bf
+    resourceVersion: "13485497"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/kong-rc-5fb4657f5d
+    uid: e69bd48d-1ca7-11e8-becf-0a58ac1f23bf
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: kong
+        name: kong-rc
+        pod-template-hash: "1960213918"
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: kong
+          name: kong-rc
+          pod-template-hash: "1960213918"
+      spec:
+        containers:
+        - env:
+          - name: KONG_ADMIN_LISTEN
+            value: 0.0.0.0:8001
+          - name: KONG_ADMIN_LISTEN_SSL
+            value: 0.0.0.0:8444
+          - name: KONG_PG_PASSWORD
+            value: kong
+          - name: KONG_PG_HOST
+            value: postgres
+          - name: KONG_PROXY_ACCESS_LOG
+            value: /dev/stdout
+          - name: KONG_ADMIN_ACCESS_LOG
+            value: /dev/stdout
+          - name: KONG_PROXY_ERROR_LOG
+            value: /dev/stderr
+          - name: KONG_ADMIN_ERROR_LOG
+            value: /dev/stderr
+          image: kong
+          imagePullPolicy: Always
+          name: kong
+          ports:
+          - containerPort: 8001
+            name: admin
+            protocol: TCP
+          - containerPort: 8000
+            name: proxy
+            protocol: TCP
+          - containerPort: 8443
+            name: proxy-ssl
+            protocol: TCP
+          - containerPort: 8444
+            name: admin-ssl
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 3
+    fullyLabeledReplicas: 3
+    observedGeneration: 1
+    readyReplicas: 3
+    replicas: 3
+- apiVersion: extensions/v1beta1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2018-01-16T20:04:41Z
+    generation: 1
+    labels:
+      app: nginx-ingress
+      component: controller
+      pod-template-hash: "2317014320"
+      release: stgnglb
+    name: stgnglb-nginx-ingress-controller-675c458764
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: stgnglb-nginx-ingress-controller
+      uid: 7d07fde1-faf8-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "13485486"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/stgnglb-nginx-ingress-controller-675c458764
+    uid: 7d0898f2-faf8-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: nginx-ingress
+        component: controller
+        pod-template-hash: "2317014320"
+        release: stgnglb
+    template:
+      metadata:
+        annotations:
+          checksum/config: 33481d2cc1e14914be061959c14749fbe1524e42d8712be4cd9ffc0cd7a151a4
+        creationTimestamp: null
+        labels:
+          app: nginx-ingress
+          component: controller
+          pod-template-hash: "2317014320"
+          release: stgnglb
+      spec:
+        containers:
+        - args:
+          - /nginx-ingress-controller
+          - --default-backend-service=default/stgnglb-nginx-ingress-default-backend
+          - --election-id=ingress-controller-leader
+          - --ingress-class=nginx
+          - --configmap=default/stgnglb-nginx-ingress-controller
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          image: gcr.io/google_containers/nginx-ingress-controller:0.9.0-beta.15
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 10254
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: nginx-ingress-controller
+          ports:
+          - containerPort: 80
+            name: http
+            protocol: TCP
+          - containerPort: 443
+            name: https
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 10254
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: default
+        serviceAccountName: default
+        terminationGracePeriodSeconds: 60
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: extensions/v1beta1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2018-01-16T20:04:41Z
+    generation: 1
+    labels:
+      app: nginx-ingress
+      component: default-backend
+      pod-template-hash: "2995971672"
+      release: stgnglb
+    name: stgnglb-nginx-ingress-default-backend-6ff9fc5bc6
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: stgnglb-nginx-ingress-default-backend
+      uid: 7d0cba66-faf8-11e7-9c30-0a58ac1f16d7
+    resourceVersion: "13485491"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/replicasets/stgnglb-nginx-ingress-default-backend-6ff9fc5bc6
+    uid: 7d101b07-faf8-11e7-9c30-0a58ac1f16d7
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: nginx-ingress
+        component: default-backend
+        pod-template-hash: "2995971672"
+        release: stgnglb
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: nginx-ingress
+          component: default-backend
+          pod-template-hash: "2995971672"
+          release: stgnglb
+      spec:
+        containers:
+        - image: gcr.io/google_containers/defaultbackend:1.3
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: nginx-ingress-default-backend
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 60
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: v1
+  kind: Node
+  metadata:
+    annotations:
+      node.alpha.kubernetes.io/ttl: "0"
+      volumes.kubernetes.io/controller-managed-attach-detach: "true"
+    creationTimestamp: 2018-01-16T19:49:18Z
+    labels:
+      agentpool: nodepool1
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/instance-type: Standard_D1_v2
+      beta.kubernetes.io/os: linux
+      failure-domain.beta.kubernetes.io/region: eastus
+      failure-domain.beta.kubernetes.io/zone: "0"
+      kubernetes.azure.com/cluster: MC_staging-group_stagingk8scluster_eastus
+      kubernetes.io/hostname: aks-nodepool1-41486201-0
+      kubernetes.io/role: agent
+      storageprofile: managed
+      storagetier: Standard_LRS
+    name: aks-nodepool1-41486201-0
+    namespace: ""
+    resourceVersion: "17483060"
+    selfLink: /api/v1/nodes/aks-nodepool1-41486201-0
+    uid: 56ea8b00-faf6-11e7-9c30-0a58ac1f16d7
+  spec:
+    externalID: 131dd0b6-8ce3-4a3a-9f53-f0de4572735d
+    podCIDR: 10.244.0.0/24
+    providerID: azure://131dd0b6-8ce3-4a3a-9f53-f0de4572735d
+  status:
+    addresses:
+    - address: 10.240.0.4
+      type: InternalIP
+    - address: aks-nodepool1-41486201-0
+      type: Hostname
+    allocatable:
+      alpha.kubernetes.io/nvidia-gpu: "0"
+      cpu: "1"
+      memory: 3399200Ki
+      pods: "110"
+    capacity:
+      alpha.kubernetes.io/nvidia-gpu: "0"
+      cpu: "1"
+      memory: 3501600Ki
+      pods: "110"
+    conditions:
+    - lastHeartbeatTime: 2018-01-16T19:50:11Z
+      lastTransitionTime: 2018-01-16T19:50:11Z
+      message: RouteController created a route
+      reason: RouteCreated
+      status: "False"
+      type: NetworkUnavailable
+    - lastHeartbeatTime: 2018-04-29T15:52:06Z
+      lastTransitionTime: 2018-01-16T19:49:18Z
+      message: kubelet has sufficient disk space available
+      reason: KubeletHasSufficientDisk
+      status: "False"
+      type: OutOfDisk
+    - lastHeartbeatTime: 2018-04-29T15:52:06Z
+      lastTransitionTime: 2018-04-05T21:34:19Z
+      message: kubelet has sufficient memory available
+      reason: KubeletHasSufficientMemory
+      status: "False"
+      type: MemoryPressure
+    - lastHeartbeatTime: 2018-04-29T15:52:06Z
+      lastTransitionTime: 2018-04-05T21:34:19Z
+      message: kubelet has no disk pressure
+      reason: KubeletHasNoDiskPressure
+      status: "False"
+      type: DiskPressure
+    - lastHeartbeatTime: 2018-04-29T15:52:06Z
+      lastTransitionTime: 2018-04-05T21:34:19Z
+      message: kubelet is posting ready status
+      reason: KubeletReady
+      status: "True"
+      type: Ready
+    daemonEndpoints:
+      kubeletEndpoint:
+        Port: 10250
+    images:
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:44717a35a580baf2d86c87c60a095557967722175644c04f01b622a46eabf0d1
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:74
+      sizeBytes: 962171545
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:5a1a2d2bf086be4aadde56681a0abaa4bb947caffb8a5668c4e231b738eaa3ce
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:73
+      sizeBytes: 962170157
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:89a85f1204a0cdf6dca7d1749abc5ff5979a8f3d6b8c8f547d0e7862bddcb34c
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:70
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:71
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:72
+      sizeBytes: 962120786
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:e2a1b13891937fa519a9d15730e28bb9c02d4b1935ee1803fe66ea7dba42bc7c
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:69
+      sizeBytes: 962119759
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:5c29a9b799466ffb9f90700876fcc961e0c023ee37ae0970fb898630a0146b1b
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:68
+      sizeBytes: 962118052
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:8c63004d599e2987eab43cbed25d2c2055e04f39d9c6ffad4b8fce1c9ddcb71e
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:66
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:67
+      sizeBytes: 962103972
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:e1883b1b3ef322f7eac93d9fab88d5c98e2b8ac1dd6680d76b92d62caa6bb76f
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:65
+      sizeBytes: 962102319
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:a1f6b28cf8dcd48523e314de6bea652ae73d49d551bad321aff1994afcfe7791
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:64
+      sizeBytes: 962101594
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:545720518d03490321efdafd3c2eeced75707e0f10c5e3574d414be3f3f1d0b5
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:63
+      sizeBytes: 962101212
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:4d209aeb595736d77c3414768e5710fffab21a9b46e1b62bcd89042c0832f460
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:62
+      sizeBytes: 962101207
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:7e47387819207d3d253106ed872811b8ea633e99207095666af8941d43c64d0a
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:61
+      sizeBytes: 961988283
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:243bbaeffe558d681ada8a5ae3e91af3f75dc5be9c3acb298a5d73bffdeee271
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:60
+      sizeBytes: 961988244
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:eaee4d9e0180db753de01e0e0c9ca93d8c92a012d5c22cf1f2eb2d15f7aa0129
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:58
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:59
+      sizeBytes: 961988160
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:6578d84caa7374972a256214bade08bc56aee262bbba5551cd456504f6be120d
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:57
+      sizeBytes: 961988156
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:27edd8228216049e8e2667134680151253857f4d855c5deb16fe2c43ebfbb9ce
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:56
+      sizeBytes: 961987770
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:c9bfdccfe018ffb5b92a5698ded2df6d901c0e6640a0b9e8a3df46be6510396d
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:55
+      sizeBytes: 961872106
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:4527c73d67be944974f545a485de7c9ea215410b9776597c3381e4ddeb892f35
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:54
+      sizeBytes: 961864531
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:6a1aeb135a255df2499d0f50be7f2e99d48590e94f10d1f0ad0ad6f283c042fa
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:53
+      sizeBytes: 961792638
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:c4e0d38b53c017abf9dbfd9d107e72503e4fa334d208b447f188c2901aea5201
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:52
+      sizeBytes: 961779542
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:1fe976e28c012addd6a3e23f53360d68d048815693cd246a510a59269d852e1e
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:51
+      sizeBytes: 961777418
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:32fb981aaf67983eac21aa77ab70da7af4a636315644c1525b658184d41e4e4d
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:50
+      sizeBytes: 961777096
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:06e2d868ef79bf84a6f99a1f257a092cef2824c3e3044c1d86d815a4115cdf28
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:49
+      sizeBytes: 961759580
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:bbe5e12676ce7627c29907162af175c079c7de1be635d89cc60930076e33d914
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:46
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:47
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:48
+      sizeBytes: 961759200
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:c088d6e49ebf0ce279aad7a4ebd69c92f9edd6d62f7712ccca3fc4bebd7c5346
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:45
+      sizeBytes: 961758595
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:995bfb2331add43285880d6f92c65042c5767745ec1029924f5f294edccf122b
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:44
+      sizeBytes: 961758470
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:4ee6f551ec2ae82793a0f5b740f1df35b6d2f879e5d7efb9230cb442d8cd677b
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:43
+      sizeBytes: 961758256
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:f7dd757065c968914e0c68249cf8e2cfd37b3aaa3afa6b048a19bde93c0c5324
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:42
+      sizeBytes: 961757589
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:a3e13aff13bd23f8fc10ef08710cfb57995a84f397d471889ac78fdeb14687bc
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:41
+      sizeBytes: 961757004
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:1c3b0888266a77c0ba7c0ff089b5d3da0225d243949c29121efdd225c30c1e74
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:40
+      sizeBytes: 961752971
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:77854fb811094b774ac346f7a229ec926350b1afde467faa284306201f45a17a
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:39
+      sizeBytes: 961751360
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:e76f0b53f476b77520c4ea6c6b96df4be4f5010e1fbf510a6b0816df628ca21e
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:38
+      sizeBytes: 961699979
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:fa4dab6bbfe8bfd6daeb87890a866284a547cf0b88285927d28e449d8097899a
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:37
+      sizeBytes: 961699959
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:0af618905ce3c36713f2f6afb789dc6ab64e4aa77b490055daa479a71a87bf30
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:36
+      sizeBytes: 961699883
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:3e1499f8ae4f61c621de0faf7ab3651e690e9a3aa4da22551aa32da1c6090fd0
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:34
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:35
+      sizeBytes: 961653679
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:eeb479cdbfa28273fab0665560683c22d26482784b07fafc8d08b23cd5e0cf2e
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:33
+      sizeBytes: 961653679
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:73c046ac59d8db355712d40905304e5de7693e7bf4c5c51394e96ec84372701d
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:32
+      sizeBytes: 961650620
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:cd108fa8c7d4ea89691679f07c14971eb98aba123eb7c1ce2d03b6cee7654797
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:30
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:31
+      sizeBytes: 961650545
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:97b0ac118a1a7c99daa8ff3c59fd10ce9762eaeb5e849da5c6ae0c4535512f6c
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:29
+      sizeBytes: 961650518
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:dcd9861bf945216759fbb2213ec5b4e09f20313d1e185007faf1daffb193bc05
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:28
+      sizeBytes: 961622802
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:7eb0021efcc6414e9babfe5a7650dab99148473e3d34533b5f80cbb34115ba7d
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:26
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:27
+      sizeBytes: 961622654
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:02a1047648378d8854e9f089116b19cffc630f52897ec6f8350d58cc73ea434b
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:25
+      sizeBytes: 961616438
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:379e4e92ae17846fe18a07540184b8e54f5ba01f54c7a8a090ee2ead0b7db7d3
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:17
+      sizeBytes: 961441721
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:32192086521f6c8636b32efb883577cb49f5c2c27d7b7b1fcbdeb362ef0426d8
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:16
+      sizeBytes: 961441709
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:e4e4bac74d9d6d482410a7453d69a597e4beb85e533f2fcbdb69ade2f8a417a6
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:15
+      sizeBytes: 961437837
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:d7b106b8fb3c4d018744b1b1621134a2cb8177c19a93b11d686115fc5ec0201e
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:14
+      sizeBytes: 961437069
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:9c2ca4680366b86feb82a87f0c921c5ed9fcab1826c71b48a03077ea172d8415
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:22
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:23
+      sizeBytes: 961435485
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:f7a04cc5dbd4cba60a9ec35c2b41f586a5df4e6cb466efbb6cc4ce4add8a3ff6
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:24
+      sizeBytes: 961435446
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:942edac7869efa1f0bf509096ecbc3c853b926e709bfa4bcabfded30ce71f8f5
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:19
+      sizeBytes: 961435229
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:fa0ebfc7722582a276694a24e90cfcb562cfd1436eb1b0388f9c490708b46b78
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:20
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:21
+      sizeBytes: 961435173
+    - names:
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend@sha256:03ef54ae4c1cdb4f69c443c458e195230b58e0f31caabc399f4fa3278db949ee
+      - u7hb34w7z3wwu.azurecr.io/conectter/frontend:18
+      sizeBytes: 961435049
+    nodeInfo:
+      architecture: amd64
+      bootID: 883acfe4-ce68-45a7-81f3-1d90c6e99ec9
+      containerRuntimeVersion: docker://1.12.6
+      kernelVersion: 4.13.0-1007-azure
+      kubeProxyVersion: v1.8.2
+      kubeletVersion: v1.8.2
+      machineID: 833e0926ee21aed71ec075d726cbcfe0
+      operatingSystem: linux
+      osImage: Debian GNU/Linux 8 (jessie)
+      systemUUID: B6D01D13-E38C-3A4A-9F53-F0DE4572735D
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

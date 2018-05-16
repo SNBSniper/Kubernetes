@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-    name: main-frontend
+  name: main-frontend
 spec: 
-    selector:
-        matchLabels:
-            app: main-frontend
-            tier: frontend
-            track: stable
-    replicas: 2
-    template:
-        metadata:
-            labels:
-                app: main-frontend
-                tier: frontend
-                track: stable
-        spec: 
-            containers:
-                - name: main-frontend
-                  image: u7hb34w7z3wwu.azurecr.io/conectter/frontend:latest
-                  ports:
-                    - name: http
-                      containerPort: 80
-            imagePullSecrets:
-                - name: regcred
+  selector:
+      matchLabels:
+          app: main-frontend
+          tier: frontend
+          track: stable
+  replicas: 2
+  template:
+      metadata:
+          labels:
+              app: main-frontend
+              tier: frontend
+              track: stable
+      spec: 
+          containers:
+              - name: main-frontend
+                image: u7hb34w7z3wwu.azurecr.io/conectter/frontend:latest
+                ports:
+                  - name: http
+                    containerPort: 80
+          imagePullSecrets:
+              - name: regcred
 
