@@ -1,0 +1,40 @@
+apiVersion:  apps/v1beta1
+kind: Deployment
+metadata: 
+  name: conectter-user
+  labels: 
+    run: user
+    name: micro-user-depl
+spec: 
+  selector:
+    matchLabels:
+      app: conectter-user  
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: conectter-user
+        microservice: user
+    spec: 
+      containers:
+         - name: conectter-user
+           image: u7hb34w7z3wwu.azurecr.io/conectter/micro-user:latest
+           imagePullPolicy: Always
+           env:
+             - name: DATABASE_URL
+               valueFrom:
+                 secretKeyRef:
+                   name:  conectter-user-secrets
+                   key:  database-url
+             - name: SECRET_KEY_BASE
+               valueFrom:
+                 secretKeyRef:
+                   name:  conectter-user-secrets
+                   key:  secret-key-base
+        
+           ports:
+             - containerPort: 3000
+               protocol: TCP
+      imagePullSecrets:
+           - name: regcred
+

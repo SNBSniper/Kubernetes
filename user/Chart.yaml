@@ -1,0 +1,5 @@
+name: "Conectter Micro Service"
+description: "User Microservice for auth and  login"
+version: 1.0.0
+maintainers:
+  - name: Daniel Tapia
