@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro-meeting
+  labels:
+    app: micro-meeting
+    tier: backend
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    # the port that this service should serve on
+  - port: {{ .Values.service.port }}
+    protocol: {{ .Values.deployment.containerProtocol}}    
+    targetPort: {{ .Values.deployment.containerPort}}
+
+  selector:
+    microservice: {{ .Values.deployment.name}}
+    

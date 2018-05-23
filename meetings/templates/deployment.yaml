@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.label}}
+  labels:
+    run: {{ .Values.deployment.label}}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        run: {{ .Values.deployment.label}} 
+        microservice: {{ .Values.deployment.name}}
+    spec:
+      containers:
+       
+      - name: {{ .Values.deployment.name}}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env: 
+          - name: SPRING_PROFILES_ACTIVE
+            value: "{{ .Values.deployment.target}}"
+        ports:
+          - containerPort: {{ .Values.deployment.containerPort}}
+            protocol: {{ .Values.deployment.containerProtocol}}
+          
+      imagePullSecrets:
+      - name: {{ .Values.deployment.imagePullSecretsName}}
+      # volumes:
+      # - name: mysql-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: mysql-pv-claim
+        
