@@ -21,7 +21,8 @@ image:
 
 service:
   name: micro-meeting
-  type: LoadBalancer
+  # type: ClusterIP
+  type: NodePort
   port: 80
 
 

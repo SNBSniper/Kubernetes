@@ -5,11 +5,13 @@ metadata:
   labels:
     run: {{ .Values.deployment.label}}
 spec:
+  selector:
+    matchLabels:
+      microservice: {{ .Values.deployment.name}}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        run: {{ .Values.deployment.label}} 
         microservice: {{ .Values.deployment.name}}
     spec:
       containers:
@@ -21,6 +23,7 @@ spec:
             value: "{{ .Values.deployment.target}}"
         ports:
           - containerPort: {{ .Values.deployment.containerPort}}
+            name: server
             protocol: {{ .Values.deployment.containerProtocol}}
           
       imagePullSecrets:
