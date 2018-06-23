@@ -14,7 +14,7 @@ deployment:
 
 image:
   repository: u7hb34w7z3wwu.azurecr.io/conectter-micro/meeting
-  tag: staging
+  tag: staging2
   pullPolicy: Always
 
 
